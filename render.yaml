@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: phishing-url-detector-backend
+    env: python
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python app.py"
+    envVars:
+      - key: FLASK_ENV
+        value: development
+    region: oregon
+    autoDeploy: true
