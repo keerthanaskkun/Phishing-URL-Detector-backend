@@ -1,9 +1,10 @@
+# api/index.py
+
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pickle
 import numpy as np
 from extract_features import extract_features
-from vercel_lambda import VercelFlaskHandler  # ✅ Add this
 
 app = Flask(__name__)
 CORS(app)
@@ -12,7 +13,7 @@ CORS(app)
 def home():
     return "Phishing URL Detector Backend is Running 🚀"
 
-# Load the trained model
+# Load the trained model (make sure model.pkl is in the same folder)
 with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
 
@@ -38,5 +39,6 @@ def predict():
         print(f"🔥 Error during prediction: {e}")
         return jsonify({'error': 'Internal server error occurred during prediction.'}), 500
 
-# ✅ Vercel handler for serverless function
-handler = VercelFlaskHandler(app)
+# Required by Vercel
+def handler(request, response):
+    return app

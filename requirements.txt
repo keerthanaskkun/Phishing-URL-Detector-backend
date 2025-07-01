@@ -1,6 +1,5 @@
 Flask==3.1.0
 flask-cors==6.0.1
-vercel-lambda
 numpy==2.3.1
 pandas==2.2.3
 scikit-learn==1.7.0
